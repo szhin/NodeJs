@@ -3,28 +3,15 @@ const path = require("path");
 
 const express = require("express");
 
-//get path all system (macos, window, ..)
-const rootDir = require("../util/path");
+const productsController = require("../controllers/products");
 
 //create router
 const router = express.Router();
 
-const products = [];
-
 // /admin/add-product => GET
-router.get("/add-product", (req, res, text) => {
-  //get path all system (macos, window, ..)
-  res.render("add-product", {
-    pageTitle: "Add Product",
-    path: "/admin/add-product",
-  });
-});
+router.get("/add-product", productsController.getAddProduct);
 
 // /admin/add-product => POST
-router.post("/add-product", (req, res, text) => {
-  products.push({ title: req.body.title });
-  res.redirect("/");
-});
+router.post("/add-product", productsController.postAddProduct);
 
-exports.router = router;
-exports.products = products;
+module.exports = router;

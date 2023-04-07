@@ -4,16 +4,10 @@ const path = require("path");
 const express = require("express");
 
 //get path all system (macos, window, ..)
-const rootDir = require("../util/path");
-const adminData = require("./admin");
+const productsController = require("../controllers/products");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  const products = adminData.products;
-  //get path all system (macos, window, ..)
-  // res.sendFile(path.join(rootDir, "views", "shop.html"));
-  res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
-});
+router.get("/", productsController.getProducts);
 
 module.exports = router;
